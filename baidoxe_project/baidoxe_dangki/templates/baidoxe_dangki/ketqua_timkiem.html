@@ -1,0 +1,31 @@
+{% extends "baidoxe_dangki/base.html" %} 
+{% block content %}
+<h2 style="color: green; text-align: center;">Kết quả tìm kiếm</h2>
+    <table class="table table-borderless">
+        <thead class="border-bottom font-weight-bold">
+            <tr>
+                <th>Chủ sở hữu</th>
+                <th>Tên phương tiện</th>
+                <th>Biển số xe</th>
+                <th>Loại phương tiện</th>
+                <th>Thời gian vào</th>
+                <th>Thời gian ra</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for PhuongTien in danhsach %}
+            <tr>
+                <td>{{PhuongTien.chusohuu}}</td>
+                <td>{{PhuongTien.tenphuongtien}}</td>
+                <td>{{PhuongTien.bienso}}</td>
+                <td>{{PhuongTien.loaiphuongtien}}</td>
+                <td>{{PhuongTien.thoigian}}</td>
+                <td>{{PhuongTien.thoigianra}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'timkiem_lichsu' %}" class="btn btn-secondary btn-block btn-lg">
+        <i class="fa-solid fa-arrow-left"></i> <b>Quay trở lại</b>
+    </a>
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends "baidoxe_dangki/base.html" %} 
+{% block content %}
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <th>Tên tài khoản</th>
+            <th>Tên người dùng</th>
+            <th>Mật khẩu</th>
+            <th>Email</th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for nguoidung in ds_nguoidung %}
+        {% if nguoidung.tentaikhoan != "admin" %}
+        <tr>
+            <td>{{nguoidung.tentaikhoan}}</td>
+            <td>{{nguoidung.tennguoidung}}</td>
+            <td>{{nguoidung.matkhau}}</td>
+            <td>{{nguoidung.email}}</td>
+            <td>
+                <form action="{% url 'xoa_nguoidung' nguoidung.id %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">
+                        <i class="fa-solid fa-trash"style="color: red;"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'admin_form' %}" class="btn btn-outline-success">
+    <i class="fa-solid fa-clock-rotate-left"></i> <b>Quay lại</b>
+</a>
+{% endblock content %}

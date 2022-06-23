@@ -1,0 +1,49 @@
+{% extends "baidoxe_dangki/base.html" %} 
+{% block content %}
+<h2 style="color: green; text-align: center;">Lịch sử ra vào bãi</h2>
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <th>Chủ sở hữu</th>
+            <th>Tên phương tiện</th>
+            <th>Biển số xe</th>
+            <th>Loại phương tiện</th>
+            <th>Thời gian vào</th>
+            <th>Thời gian ra</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for PhuongTien in danhsach %}
+        <tr>
+            <td>{{PhuongTien.chusohuu}}</td>
+            <td>{{PhuongTien.tenphuongtien}}</td>
+            <td>{{PhuongTien.bienso}}</td>
+            <td>{{PhuongTien.loaiphuongtien}}</td>
+            <td>{{PhuongTien.thoigian}}</td>
+            <td>{{PhuongTien.thoigianra}}</td>
+            <td>
+                <form action="{% url 'xoa_lichsu' PhuongTien.id %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">
+                        <i class="fa-solid fa-trash"style="color: red;"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'timkiem_lichsu' %}" class="btn btn-secondary btn-block btn-lg" style="background-color: #28a745;
+border-color: #28a745;">
+    <i class="fa-solid fa-arrow-left"></i> <b>Tìm kiếm</b>
+</a>
+{% if ttk == "admin" %}
+    <a href="{% url 'admin_form' %}" class="btn btn-secondary btn-block btn-lg">
+        <i class="fa-solid fa-arrow-left"></i> <b>Quay trở lại</b>
+    </a>
+{%else%}
+    <a href="{% url 'danhsach_phuongtien' %}" class="btn btn-secondary btn-block btn-lg">
+        <i class="fa-solid fa-arrow-left"></i> <b>Quay trở lại</b>
+    </a>
+{% endif %}
+{% endblock content %}

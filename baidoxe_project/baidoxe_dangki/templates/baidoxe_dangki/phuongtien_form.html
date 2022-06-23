@@ -1,0 +1,31 @@
+{% extends "baidoxe_dangki/base.html" %} {% load crispy_forms_tags %} {% block content %}
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %} {{form.chusohuu|as_crispy_field}} {{form.tenphuongtien|as_crispy_field}}
+    <div class="row">
+        <div class="col-md-4">
+            {{form.bienso|as_crispy_field}}
+        </div>
+        <div class="col-md-8">
+            {{form.loaiphuongtien|as_crispy_field}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>  
+        </div>
+        <div class="col-md-4">
+            {% if ttk == "admin" %}
+                <a href="{% url 'admin_form' %}" class="btn btn-secondary btn-block btn-lg">
+                    <i class="fa-solid fa-arrow-left"></i> <b>Quay trở lại</b>
+                </a>
+            {%else%}
+                <a href="{% url 'danhsach_phuongtien' %}" class="btn btn-secondary btn-block btn-lg">
+                    <i class="fa-solid fa-arrow-left"></i> <b>Quay trở lại</b>
+                </a>
+            {%endif%}
+        </div>
+    </div>
+</form>
+    <h6>Không bỏ trống các ô có đánh dấu *</h6>
+{% endblock content %}
